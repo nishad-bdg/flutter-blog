@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_blog/bloc/blog_category_bloc.dart';
@@ -64,8 +65,9 @@ class CategoryList extends StatelessWidget {
                 )
               );
             },
-            leading: Image.network(
-              "${BlogData.base_url}${categories[index].categoryImage}",
+            leading: CachedNetworkImage(
+              imageUrl: "${BlogData.base_url}${categories[index].categoryImage}",
+              placeholder: (context, url) => new CircularProgressIndicator(),
               height: 80.0,
               width: 80.0,
             ),

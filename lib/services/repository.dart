@@ -8,4 +8,8 @@ class Repository {
 
   Future<List<Blogs>> fetchBlogs(String slug) =>
     blogAPiProvider.fetchBlogs(slug);
+
+  Future<Blogs> fetchBlogDetails(int id) =>
+    blogAPiProvider.fetchBlogDetails(id);
+  
 }

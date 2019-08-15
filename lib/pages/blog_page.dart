@@ -1,8 +1,10 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_blog/bloc/blog/bloc.dart';
 import 'package:flutter_blog/model/api_model.dart';
+import 'package:flutter_blog/pages/blog_details.dart';
 import 'package:flutter_blog/services/repository.dart';
 import 'package:flutter_blog/utils/BlogData.dart';
 import 'package:flutter_blog/widgets/laoding.dart';
@@ -80,6 +82,14 @@ class _BlogPageState extends State<BlogPage> {
                 },
                 onTap: () {
                   print("Pressed items");
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => DetailPage(
+                                repository: widget.repository,
+                                id: blogs[index].id,
+                                appBarTitle: blogs[index].title,
+                              )));
                 },
                 child: GridTile(
                     footer: Container(
@@ -93,11 +103,14 @@ class _BlogPageState extends State<BlogPage> {
                       ),
                     ),
                     child: Container(
-                        decoration: BoxDecoration(
-                            image: DecorationImage(
-                                fit: BoxFit.cover,
-                                image: NetworkImage(
-                                    "${BlogData.base_url}${blogs[index].blogImage}"))))),
+                      child: CachedNetworkImage(
+                        imageUrl:
+                            "${BlogData.base_url}${blogs[index].blogImage}",
+                        placeholder: (context, url) =>
+                            new CircularProgressIndicator(),
+                        fit: BoxFit.cover,
+                      ),
+                    )),
               ),
             ),
           ),

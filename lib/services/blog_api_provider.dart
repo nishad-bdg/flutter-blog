@@ -37,6 +37,16 @@ class BlogApiProvider {
   }
 
 
-  Future<Blogs>
+  Future<Blogs>fetchBlogDetails(int id) async {
+    print(baseUrl+'/blog/'+id.toString()+'/');
+    final response = await http.get(baseUrl+'/blog/'+id.toString()+'/');
+    print(response.body.toString());
+    final parse = json.decode(response.body);
+    if(response.statusCode == 200){
+      return Blogs.fromJson(parse);
+    }else{
+      throw Exception("Error loading data");
+    }
+  }
 
 }

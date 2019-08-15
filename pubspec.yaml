@@ -27,6 +27,7 @@ dependencies:
   flutter_bloc: 0.19.1
   meta: 1.1.6
   equatable: ^0.4.0
+  cached_network_image: ^1.1.1
 
 dev_dependencies:
   flutter_launcher_icons: "^0.7.2"
